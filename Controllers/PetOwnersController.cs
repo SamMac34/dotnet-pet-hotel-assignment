@@ -39,27 +39,35 @@ namespace pet_hotel.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePetOwner(PetOwner petowner)
+        public IActionResult CreatePetOwner(PetOwner petOwner)
         {
-            _context.Add(petowner);
+            _context.Add(petOwner);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(CreatePetOwner), new {id = petowner.Id}, petowner);
+            return CreatedAtAction(nameof(CreatePetOwner), new {id = petOwner.Id}, petOwner);
         }
 
         [HttpDelete("{id}")]
 
         public IActionResult DeleteOwner(int id)
         {
-            PetOwner petowner = _context.PetOwners.Find(id);
-            _context.PetOwners.Remove(petowner);
+            PetOwner petOwner = _context.PetOwners.Find(id);
+            _context.PetOwners.Remove(petOwner);
             _context.SaveChanges();
 
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public PetOwner Put(int id, PetOwner petOwner)
+        {
+            petOwner.Id = id;
 
+            _context.Update(petOwner);
+            _context.SaveChanges();
 
+            return petOwner;
+        }
 
     }
 }

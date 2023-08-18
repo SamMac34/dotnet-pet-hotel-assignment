@@ -35,10 +35,10 @@ namespace pet_hotel
 
         public string PetColorType { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime? CheckedInAt { get; set; }
 
-        [ForeignKey("OwnedBy")]
+        [ForeignKey("petOwner")]
         public int PetOwnerId { get; set; }
-        public Pet OwnedBy { get; set; }
+        public PetOwner petOwner { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using pet_hotel.Models;
 namespace pet_hotel.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230817163559_CreatePetsTable")]
-    partial class CreatePetsTable
+    [Migration("20230817211814_CreatTablePetOwners")]
+    partial class CreatTablePetOwners
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace pet_hotel.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime?>("CheckedInAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
@@ -44,6 +44,8 @@ namespace pet_hotel.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PetOwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -68,6 +70,17 @@ namespace pet_hotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PetOwners");
+                });
+
+            modelBuilder.Entity("pet_hotel.Pet", b =>
+                {
+                    b.HasOne("pet_hotel.PetOwner", "petOwner")
+                        .WithMany()
+                        .HasForeignKey("PetOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("petOwner");
                 });
 #pragma warning restore 612, 618
         }
