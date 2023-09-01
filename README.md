@@ -1,5 +1,7 @@
 # Pet Hotel
 
+This is a C# full stack project that was worked on by Jonathan Viegut, Sam McCauley and Amy Smith.
+
 This is a standard c-sharp project that was started with `dotnet new webapi --no-https -n project-name`. In addition:
 
   - It has dotnet 6 as its version. If you installed 7, for example, in the `pet-hotel.csproj` file, change the target framework to:
